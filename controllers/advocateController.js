@@ -36,7 +36,7 @@ const createAdvocate = async (req, res) => {
     const body = req.body;
     try {
         const data = await Advocate.create(body);
-        res.status(200).json({
+        res.status(201).json({
             status: "Successful",
             data: data
         });
@@ -48,8 +48,43 @@ const createAdvocate = async (req, res) => {
     }
 }
 
+const updateAdvocate = async (req, res) => {
+    const id = req.params.id;
+    const body = req.body;
+
+    try{
+        const data = await Advocate.findByIdAndUpdate(id, body);
+        res.status(200).json({
+            status: "Successful",
+            data: data
+        })
+    }catch(err){
+        res.status(400).json({
+            status: "Failed",
+            message: err.message
+        })
+    }
+}
+
+const deleteAdvocate = async (req, res) => {
+    const id = req.params.id;
+    try{
+        await Advocate.findByIdAndDelete(id);
+        res.status(204).json({
+            status: null
+        })
+    }catch(err){
+        res.status(400).json({
+            status: "Failed",
+            message: err.message
+        })
+    }
+}
+
 module.exports = {
     getAllAdvocates,
     getAdvocate,
-    createAdvocate
+    createAdvocate,
+    updateAdvocate,
+    deleteAdvocate
 }
