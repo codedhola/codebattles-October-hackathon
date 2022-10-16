@@ -1,6 +1,6 @@
 const Advocate = require("./../models/advocateModel");
 
-const getAdvocates = async (req, res) => {
+const getAllAdvocates = async (req, res) => {
     try{
         const data = await Advocate.find({});
         res.status(200).json({
@@ -16,7 +16,25 @@ const getAdvocates = async (req, res) => {
     }
 }
 
+const getAdvocate = async (req, res) => {
+    const id = req.params.id;
+    const body = req.body;
+    try {
+        const data = await Advocate.findByIdAndUpdate(id, body);
+        res.status(200).json({
+            status: "Successful",
+            data: data
+        })
+    }catch(err){
+        res.status(400).json({
+            Status: "Failed",
+            message: err.message
+        })
+    }
+}
+
 
 module.exports = {
-    getAdvocates
+    getAllAdvocates,
+    getAdvocate
 }

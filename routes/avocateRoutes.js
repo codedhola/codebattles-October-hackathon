@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const controllers = require("./../controllers/advocateController");
 
-router.get("/", controllers.getAdvocates);
+router.get("/", controllers.getAllAdvocates);
+
+router.get("/:id", controllers.getAdvocate);
 
 module.exports = router;
