@@ -3,9 +3,9 @@ const controllers = require("./../controllers/companyController");
 
 router.get("/", controllers.getAllCompanies);
 
-router.get("/:id", controllers.getCompany);
-
 router.post("/", controllers.addCompany);
+
+router.get("/:id", controllers.getCompany);
 
 router.patch("/:id", controllers.updateCompany);
 
