@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 const advocateSchema = new mongoose.Schema({
     name: {
@@ -19,8 +20,9 @@ const advocateSchema = new mongoose.Schema({
         type: Number,
         default: 1
     },
-    company: {
-        type: [String]
+    companies: {
+        type: Schema.Types.ObjectId,
+        ref: "advocates"
     },
     links: [String]
 });
@@ -28,3 +30,20 @@ const advocateSchema = new mongoose.Schema({
 const Advocate = mongoose.model("Advocate", advocateSchema);
 
 module.exports = Advocate;
+
+
+/** 
+ *   SCHEMA OBJECT TYPE
+ 
+"name": "shola benson",
+  "profile_pic": "shola.jpg",
+  "short_bio": "I am a backend engineeer ",
+  "long_bio": "works as a developer experience at flutterwave",
+  "company": {
+    "$oid": "",
+    "name": "flutterwave",
+    "logo": "flutterwave.jpg",
+    "href": "/companies/"    
+  }
+  
+*/
