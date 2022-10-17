@@ -1,8 +1,15 @@
 const Advocate = require("./../models/advocateModel");
 
 const getAllAdvocates = async (req, res) => {
+const queryObj = {...req.query};
+let excludes = ["sort", "page", "limit"];
+excludes.forEach((el) => delete queryObj[el]);
+
+console.log(queryObj.name, excludes);
     try{
-        const data = await Advocate.find({});
+        const query = Advocate.find(queryObj);
+
+        const data = await query;
         res.status(200).json({
             status: "successful",
             results: data.length,
@@ -53,7 +60,7 @@ const updateAdvocate = async (req, res) => {
     const body = req.body;
 
     try{
-        const data = await Advocate.findByIdAndUpdate(id, body);
+        const data = await Advocate.findByIdAndUpdate(id, body, { new: true, runValidators: true});
         res.status(200).json({
             status: "Successful",
             data: data
