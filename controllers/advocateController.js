@@ -1,14 +1,17 @@
 const Advocate = require("./../models/advocateModel");
 
 const getAllAdvocates = async (req, res) => {
-const queryObj = {...req.query};
-let excludes = ["sort", "page", "limit"];
-excludes.forEach((el) => delete queryObj[el]);
-
-console.log(queryObj.name, excludes);
+// SEARCH ALL QUERY PARAMATERS EXCEPT EXCLUDES
+    const queryObj = {...req.query};
+    let excludes = ["sort", "page", "limit"];
+    excludes.forEach((el) => delete queryObj[el]);
+    const name = req.query.name;
+    
     try{
-        const query = Advocate.find(queryObj);
-
+        // REGEX TO SEARCH A NAME  => {name: {$regex: new RegExp(`${name}`, 'g')}}
+        let query = Advocate.find({});
+        query = query
+        
         const data = await query;
         res.status(200).json({
             status: "successful",
