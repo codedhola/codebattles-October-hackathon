@@ -7,6 +7,22 @@ const advocateSchema = new mongoose.Schema({
         required: [true, "Advocate requires a name"],
         trim: true
     },
+    email: {
+        type: String,
+        required: [true, "An Email must be provided"],
+        unique: true,
+        validate: {
+            validator: function(val){
+                return val.match(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/);
+            },
+            message: "A Valid Email must be provided"
+        }
+    },
+    userName: {
+        type: String,
+        required: [true, "A Username must be provided"],
+        unique: true
+    },
     profile_pic: {
         type: String,
         default: "image.jpg"
@@ -20,11 +36,13 @@ const advocateSchema = new mongoose.Schema({
         type: Number,
         default: 1
     },
-    companies: {
-        type: Schema.Types.ObjectId,
-        ref: "advocates"
-    },
-    links: [String]
+    company: [Schema.Types.ObjectId],
+    links: Object,
+    createdAt: {
+        type: Date,
+        default: Date.now(),
+        select: false
+    }
 });
 
 const Advocate = mongoose.model("Advocate", advocateSchema);
@@ -39,11 +57,11 @@ module.exports = Advocate;
   "profile_pic": "shola.jpg",
   "short_bio": "I am a backend engineeer ",
   "long_bio": "works as a developer experience at flutterwave",
-  "company": {
-    "$oid": "",
-    "name": "flutterwave",
-    "logo": "flutterwave.jpg",
-    "href": "/companies/"    
+  "links": {
+    "youtube": "youtube.shola",
+    "github": "github.com/shola",
+    "twitter": "twitter.com/shola"
   }
+  "company": [ObjectId]
   
 */

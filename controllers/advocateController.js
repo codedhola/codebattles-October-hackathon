@@ -26,10 +26,11 @@ const getAllAdvocates = async (req, res) => {
         }
         
         let page = req.query.page || 1;
-        let limit = req.query.limit || 2;
+        let limit = req.query.limit || 15;
         let skip = (page - 1) * limit;
 
         query = query.skip(skip).limit(limit);
+        
         
         const data = await query;
         res.status(200).json({
