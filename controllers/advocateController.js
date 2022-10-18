@@ -13,8 +13,12 @@ const getAllAdvocates = async (req, res) => {
         if(req.query.name){
             query = query.find({name: {$regex: new RegExp(`${req.query.name}`, 'g')}});
         }
+        
         if(req.query.sort){
-            
+            const sortby = req.query.sort.split(",").join(" ");
+            query = query.sort(sortby);
+        }else {
+            query = query.sort("createdAt")
         }
 
         // LIMITING FIELDS

@@ -13,7 +13,7 @@ const advocateSchema = new mongoose.Schema({
         unique: true,
         validate: {
             validator: function(val){
-                return val.match(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/);
+                return val.match(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/i);
             },
             message: "A Valid Email must be provided"
         }
@@ -25,7 +25,13 @@ const advocateSchema = new mongoose.Schema({
     },
     profile_pic: {
         type: String,
-        default: "image.jpg"
+        default: "image.jpg",
+        validate: {
+            validator: function(val){
+                return val.match(/[a-z0-9]\.(jpg|png|jpeg)/i)
+            },
+            message: "Profile pic must be in a valid format: Either jpg, jpeg or png"
+        }
     },
     short_bio: {
         type: String,
@@ -51,17 +57,18 @@ module.exports = Advocate;
 
 
 /** 
- *   SCHEMA OBJECT TYPE
+ *   SCHEMA OBJECT EXAMPLE
  
-"name": "shola benson",
-  "profile_pic": "shola.jpg",
-  "short_bio": "I am a backend engineeer ",
-  "long_bio": "works as a developer experience at flutterwave",
-  "links": {
-    "youtube": "youtube.shola",
-    "github": "github.com/shola",
-    "twitter": "twitter.com/shola"
+  {
+    "name": "shola benson",
+    "profile_pic": "shola.jpg",
+    "short_bio": "I am a backend engineeer ",
+    "long_bio": "works as a developer experience at flutterwave",
+    "links": {
+        "youtube": "youtube.shola",
+        "github": "github.com/shola",
+        "twitter": "twitter.com/shola"
+    }
+    "company": [ObjectId]
   }
-  "company": [ObjectId]
-  
 */
