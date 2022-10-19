@@ -3,15 +3,15 @@ const Advocate = require("./../models/advocateModel");
 const getAllAdvocates = async (req, res) => {
 // SEARCH ALL QUERY PARAMATERS EXCEPT EXCLUDES
     const queryObj = {...req.query};
-    let excludes = ["sort", "page", "limit", "name"];
+    let excludes = ["sort", "page", "limit", "username"];
     excludes.forEach((el) => delete queryObj[el]);
     
     try{
         // REGEX TO SEARCH A NAME  => {name: {$regex: new RegExp(`${name}`, 'g')}}
         let query = Advocate.find(queryObj);
 
-        if(req.query.name){
-            query = query.find({name: {$regex: new RegExp(`${req.query.name}`, 'g')}});
+        if(req.query.username){
+            query = query.find({userName: {$regex: new RegExp(`${req.query.username}`, 'g')}});
         }
         
         if(req.query.sort){
