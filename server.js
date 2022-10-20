@@ -21,6 +21,7 @@ mongoose.connect(mongooseConnect, connectionParams)
 
     app.listen(PORT, () => {
         console.log("Server Running... on port " + PORT);
+        console.log(mongooseConnect);
 })
 
 // LOCAL DEVELOPMENT
