@@ -5,7 +5,7 @@ const app = express();
 
 app.use(express.json());
 
-app.use("/", advocateRoute);
+app.use("/advocate", advocateRoute);
 app.use("/companies", companyRoute);
 
 module.exports = app;
