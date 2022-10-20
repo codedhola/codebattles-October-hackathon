@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-require("dotenv").config({ path: "./config/config.env"});
 const app = require("./../app");
 
 const connectionParams = {
@@ -31,6 +30,7 @@ mongoose.connect(process.env.CONNECT_MONGOOSE).then(() => {
         console.log("Server Running... on port " + PORT);
     }) 
 });
+
 }
 
 module.exports = Connection;

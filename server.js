@@ -1,7 +1,6 @@
-const mongoose = require("mongoose");
+require("dotenv").config({ path: "./config/config.env"}); // ENVIRONMENT VARIABLES
+
 const connection = require("./config/db");
 
-const app = require("./app");
-require("dotenv").config({ path: "./config/config.env"});
-
+// INITIATE CONNECTION CALL
 connection();
