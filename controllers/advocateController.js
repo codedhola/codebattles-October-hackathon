@@ -48,10 +48,11 @@ const getAllAdvocates = async (req, res, next) => {
     }
 }
 
-const getAdvocate = async (req, res) => {
+const getAdvocate = async (req, res, next) => {
     const id = req.params.id;
     try {
         const data = await Advocate.findById(id);
+        if(!data) return next(new HandleError("This ID does not exist or have been deleted", 404))
         res.status(200).json({
             status: "Successful",
             data: data
@@ -59,7 +60,7 @@ const getAdvocate = async (req, res) => {
     }catch(err){
         res.status(400).json({
             Status: "Failed",
-            message: err.message
+            message: err
         })
     }
 }
@@ -83,43 +84,37 @@ const createAdvocate = async (req, res) => {
             data: data
         });
     }catch(err){
-        res.status(400).json({
-            status: "Failed",
-            message: err
-        });
+        next(new HandleError(err, 400))
     }
 }
 
-const updateAdvocate = async (req, res) => {
+const updateAdvocate = async (req, res, next) => {
     const id = req.params.id;
     const body = req.body;
 
     try{
         const data = await Advocate.findByIdAndUpdate(id, body, { new: true, runValidators: true});
+        if(!data) return next(new HandleError(`Advocate with ID ${id} not found or might have been deleted`, 404))
+        
         res.status(200).json({
             status: "Successful",
             data: data
         })
     }catch(err){
-        res.status(400).json({
-            status: "Failed",
-            message: err.message
-        })
+        next(new HandleError(err, 400))
     }
 }
 
-const deleteAdvocate = async (req, res) => {
+const deleteAdvocate = async (req, res, next) => {
     const id = req.params.id;
     try{
-        await Advocate.findByIdAndDelete(id);
+        const del = await Advocate.findByIdAndDelete(id);
+        if(!del) return next(new HandleError(`${id} cant be found in database, might be deleted`, 404))
         res.status(204).json({
             status: null
         })
     }catch(err){
-        res.status(400).json({
-            status: "Failed",
-            message: err.message
-        })
+        next(new HandleError(err, 400))
     }
 }
 
