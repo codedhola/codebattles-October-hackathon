@@ -5,10 +5,17 @@ const companySchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, "Company must have a name"],
-        trim: true
+        trim: true,
+        unique: true
     },
     logo: {
         type: String,
+        validate: {
+            validator: function(val){
+                return val.match(/[a-z0-9]\.(jpg|png|jpeg)/i)
+            },
+            message: "Company logo must be a valid png, jpg, or jpeg file"
+        },
         default: "logo.png"
     },
     summary: {

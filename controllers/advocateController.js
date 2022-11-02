@@ -8,21 +8,18 @@ const getAllAdvocates = async (req, res, next) => {
     excludes.forEach((el) => delete queryObj[el]);
     
     try{
-        // REGEX TO SEARCH A NAME  => {name: {$regex: new RegExp(`${name}`, 'g')}}
         let query = Advocate.find(queryObj);
 
+        // QUERY METHODS
         if(req.query.username){
-            query = query.find({userName: {$regex: new RegExp(`${req.query.username}`, 'g')}});
+            query = query.find({userName: {$regex: new RegExp(`${req.query.username}`, 'g')}}); // QUERY USERNAME
         }
-        
         if(req.query.sort){
             const sortby = req.query.sort.split(",").join(" ");
             query = query.sort(sortby);
         }else {
-            query = query.sort("createdAt")
+            query = query.sort("createdAt") // SORTBY -CREATEDAT
         }
-
-        // LIMITING FIELDS
         if(req.query.fields){
             let fields = req.query.fields.split(",").join(" ")
             query = query.select(fields);
