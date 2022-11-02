@@ -11,7 +11,7 @@ const advocateSchema = new mongoose.Schema({
         type: String,
         required: [true, "An Email must be provided"],
         unique: true,
-        validate: {
+        validate: { 
             validator: function(val){
                 return val.match(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/i);
             },
@@ -25,13 +25,13 @@ const advocateSchema = new mongoose.Schema({
     },
     profile_pic: {
         type: String,
-        default: "image.jpg",
-        validate: {
-            validator: function(val){
-                return val.match(/[a-z0-9]\.(jpg|png|jpeg)/i)
-            },
-            message: "Profile pic must be in a valid format: Either jpg, jpeg or png"
-        }
+        default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMN5gaxSCB4Nwwx6jw-4vosACBtVVqMfjugQ&usqp=CAU",
+        // validate: {
+        //     validator: function(val){
+        //         return val.match(/[a-z0-9]\.(jpg|png|jpeg)/i)
+        //     },
+        //     message: "Profile pic must be in a valid format: Either jpg, jpeg or png"
+        // }
     },
     short_bio: {
         type: String,

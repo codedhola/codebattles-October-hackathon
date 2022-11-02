@@ -4,3 +4,4 @@ const connection = require("./config/db");
 
 // INITIATE CONNECTION CALL
 connection();
+

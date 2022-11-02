@@ -1,6 +1,7 @@
+const HandleError = require("../config/handleError");
 const Advocate = require("./../models/advocateModel");
 
-const getAllAdvocates = async (req, res) => {
+const getAllAdvocates = async (req, res, next) => {
 // SEARCH ALL QUERY PARAMATERS EXCEPT EXCLUDES
     const queryObj = {...req.query};
     let excludes = ["sort", "page", "limit", "username"];
@@ -43,10 +44,7 @@ const getAllAdvocates = async (req, res) => {
             data: data
         });
     }catch(err){
-        res.status(404).json({
-            status: "Failed",
-            message: err
-        })
+        next(new HandleError(err, 400));
     }
 }
 
@@ -67,7 +65,17 @@ const getAdvocate = async (req, res) => {
 }
 
 const createAdvocate = async (req, res) => {
-    const body = req.body;
+    const body = {
+         name: req.body.name,
+         email: req.body.email,
+         userName: req.body.userName,
+         profile_pic: req.body.profile_pic,
+         short_bio: req.body.short_bio,
+         long_bio: req.body.long_bio,
+         advocate_years_exp: req.advocate_years_exp,
+         company: req.body.company,
+         links: req.body.links,
+    };
     try {
         const data = await Advocate.create(body);
         res.status(201).json({
@@ -77,7 +85,7 @@ const createAdvocate = async (req, res) => {
     }catch(err){
         res.status(400).json({
             status: "Failed",
-            message: err.message
+            message: err
         });
     }
 }
