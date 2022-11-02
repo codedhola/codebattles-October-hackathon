@@ -26,8 +26,8 @@ function Connection(){
 
 const PORT = process.env.PORT || 3000;
 
-console.log(process.env.CONNECT_MONGOOSE)
-mongoose.connect(process.env.CONNECT_MONGOOSE).then(() => {
+
+mongoose.connect(process.env.CONNECT_MONGOOSE, connectionParams).then(() => {
     app.listen(PORT, () => {
         console.log("Server Running... on port " + PORT);
     }) 
