@@ -6,33 +6,34 @@ const connectionParams = {
     useNewUrlParser: true,
     useUnifiedTopology: true 
 }
-// const mongooseConnect = process.env.CONNECT_CLOUD.replace(/<password>/, () =>  process.env.PASSKEY);
+const mongooseConnect = process.env.CONNECT_CLOUD.replace(/<password>/, () =>  process.env.PASSKEY);
 
 function Connection(){
-// mongoose.connect(mongooseConnect, connectionParams)
-//     .then( () => {
-//         console.log('Connected to the database ')
-//     })
-//     .catch( (err) => {
-//         console.error(`Error connecting to the database. n${err}`)
-//     })
+    mongoose.connect(mongooseConnect, connectionParams)
+        .then( () => {
+            console.log('Connected to the database ')
+        })
+        .catch( (err) => {
+            console.error(`Error connecting to the database. n${err}`)
+        })
 
-//     app.listen(PORT, () => {
-//         console.log("Server Running... on port " + PORT)
-//         console.log(mongooseConnect)
-// })
+        app.listen(PORT, () => {
+            console.log("Server Running... on port " + PORT)
+            console.log(mongooseConnect)
+    })
+}
 
 // LOCAL DEVELOPMENT
 
 
 
 
-mongoose.connect(process.env.CONNECT_MONGOOSE, connectionParams).then(() => {
-    app.listen(PORT, () => {
-        console.log("Server Running... on port " + PORT)
-    }) 
-}).catch(err => console.log(err))
+// mongoose.connect(process.env.CONNECT_MONGOOSE, connectionParams).then(() => {
+//     app.listen(PORT, () => {
+//         console.log("Server Running... on port " + PORT)
+//     }) 
+// }).catch(err => console.log(err))
 
-}
+// }
 
 module.exports = Connection
