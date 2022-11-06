@@ -1,14 +1,14 @@
-const router = require("express").Router();
-const controllers = require("./../controllers/advocateController");
+const router = require("express").Router()
+const controllers = require("./../controllers/advocateController")
 
-router.get("/", controllers.getAllAdvocates);
+router.get("/", controllers.getAllAdvocates)
 
-router.post("/", controllers.createAdvocate);
+router.post("/", controllers.createAdvocate)
 
-router.get("/:id", controllers.getAdvocate);
+router.get("/:id", controllers.getAdvocate)
 
-router.patch("/:id", controllers.updateAdvocate);
+router.patch("/:id", controllers.updateAdvocate)
 
-router.delete("/:id", controllers.deleteAdvocate);
+router.delete("/:id", controllers.deleteAdvocate)
 
-module.exports = router;
+module.exports = router

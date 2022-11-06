@@ -1,5 +1,6 @@
-const mongoose = require("mongoose");
-const app = require("./../app");
+const mongoose = require("mongoose")
+const app = require("./../app")
+const PORT = process.env.PORT || 3000
 
 const connectionParams = {
     useNewUrlParser: true,
@@ -13,26 +14,25 @@ function Connection(){
 //         console.log('Connected to the database ')
 //     })
 //     .catch( (err) => {
-//         console.error(`Error connecting to the database. n${err}`);
+//         console.error(`Error connecting to the database. n${err}`)
 //     })
 
 //     app.listen(PORT, () => {
-//         console.log("Server Running... on port " + PORT);
-//         console.log(mongooseConnect);
+//         console.log("Server Running... on port " + PORT)
+//         console.log(mongooseConnect)
 // })
 
 // LOCAL DEVELOPMENT
 
 
-const PORT = process.env.PORT || 3000;
 
 
 mongoose.connect(process.env.CONNECT_MONGOOSE, connectionParams).then(() => {
     app.listen(PORT, () => {
-        console.log("Server Running... on port " + PORT);
+        console.log("Server Running... on port " + PORT)
     }) 
-}).catch(err => console.log(err));
+}).catch(err => console.log(err))
 
 }
 
-module.exports = Connection;
+module.exports = Connection

@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mongoose = require("mongoose")
+const Schema = mongoose.Schema
 
 const advocateSchema = new mongoose.Schema({
     name: {
@@ -49,11 +49,11 @@ const advocateSchema = new mongoose.Schema({
         default: Date.now(),
         select: false
     }
-});
+})
 
-const Advocate = mongoose.model("Advocate", advocateSchema);
+const Advocate = mongoose.model("Advocate", advocateSchema)
 
-module.exports = Advocate;
+module.exports = Advocate
 
 
 /** 
