@@ -28,7 +28,7 @@ const getAllAdvocates = async (req, res, next) => {
         }
         
         let page = req.query.page || 1
-        let limit = req.query.limit || 15
+        let limit = req.query.limit || 8
         let skip = (page - 1) * limit
 
         query = query.skip(skip).limit(limit)
@@ -62,7 +62,7 @@ const getAdvocate = async (req, res, next) => {
     }
 }
 
-const createAdvocate = async (req, res) => {
+const createAdvocate = async (req, res, next) => {
     const body = {
          name: req.body.name,
          email: req.body.email,

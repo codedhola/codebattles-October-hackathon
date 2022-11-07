@@ -9,6 +9,7 @@ const fs = require("fs")
 const indexPage = fs.readFileSync("index.html", "utf-8")
 app.use(express.json())
 
+app.get("/", (req, res) => res.redirect("/v1/api/"))
 app.get("/v1/api/", (req, res) => { res.send(indexPage)});
 app.use("/v1/api/advocates", advocateRoute)
 app.use("/v1/api/companies", companyRoute)
