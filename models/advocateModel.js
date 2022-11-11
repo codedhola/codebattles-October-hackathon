@@ -25,13 +25,13 @@ const advocateSchema = new mongoose.Schema({
     },
     profile_pic: {
         type: String,
-        default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMN5gaxSCB4Nwwx6jw-4vosACBtVVqMfjugQ&usqp=CAU",
-        // validate: {
-        //     validator: function(val){
-        //         return val.match(/[a-z0-9]\.(jpg|png|jpeg)/i)
-        //     },
-        //     message: "Profile pic must be in a valid format: Either jpg, jpeg or png"
-        // }
+        default: "https://cdn.pixabay.com/photo/2017/02/23/13/05/avatar-2092113_960_720.png",
+        validate: {
+            validator: function(val){
+                return val.match(/[a-z0-9]\.(jpg|png|jpeg)/i)
+            },
+            message: "Profile pic must be in a valid format: Either jpg, jpeg or png"
+        }
     },
     short_bio: {
         type: String,
